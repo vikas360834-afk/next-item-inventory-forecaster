@@ -1,0 +1,15 @@
+{
+  "dataset": "synthetic SKU basket transactions",
+  "seed": 42,
+  "transactions_total": 1200,
+  "train_transactions": 960,
+  "test_transactions": 240,
+  "split": "80/20 after deterministic shuffle",
+  "ranking_k": 5,
+  "metrics": {
+    "ngram_sequence_model_hit_rate_at_5": 0.575,
+    "ngram_sequence_model_mrr": 0.4685416667,
+    "popularity_baseline_hit_rate_at_5": 0.4291666667
+  },
+  "interpretation": "On this deterministic synthetic holdout, the sequence model HitRate@5 is 57.50%, compared with 42.92% for the popularity baseline. This is a reproducible demo result, not a claim about real retail performance."
+}
