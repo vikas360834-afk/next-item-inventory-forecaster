@@ -1,1 +1,11 @@
-[Project source pending transfer from verified local build]
+{
+  "evaluation": "synthetic holdout demonstration",
+  "seed": 42,
+  "transactions": 1200,
+  "train_fraction": 0.8,
+  "metric_definitions": {
+    "hit_rate_at_5": "Fraction of held-out baskets where the final SKU appears in the top five recommendations.",
+    "mrr": "Mean reciprocal rank of the held-out final SKU."
+  },
+  "note": "Run python -c \"from app.core import milestone_5; print(milestone_5())\" to reproduce metrics on the current code and environment."
+}
