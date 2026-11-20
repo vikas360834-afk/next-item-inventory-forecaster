@@ -1,6 +1,5 @@
-streamlit>=1.32
+streamlit>=1.36
 pandas>=2.0
-numpy>=1.24
-plotly>=5.18
-torch>=2.2
+httpx>=0.27
 pytest>=8.0
+torch>=2.2
