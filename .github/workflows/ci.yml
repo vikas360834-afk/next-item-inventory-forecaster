@@ -10,5 +10,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install -r requirements.txt
-      - run: pytest -q
+          cache: "pip"
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Verify project imports
+        run: python -c "import app.core; import app.transformer; print('Project imports OK')"
+      - name: Run tests
+        env:
+          PYTHONPATH: .
+        run: python -m pytest -q
