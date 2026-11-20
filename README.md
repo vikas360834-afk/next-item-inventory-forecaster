@@ -57,3 +57,12 @@ The Transformer is a compact model trained from scratch on SKU token sequences; 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest -q
 ```
+
+## Reproducible evaluation results
+
+A deterministic 1,200-basket synthetic dataset was split into 960 training and 240 holdout baskets. At K=5, the sequence model achieved **57.50% HitRate@5** and **0.4685 MRR**. The popularity-only baseline achieved **42.92% HitRate@5**. The measured result is also stored in `results/evaluation_results.json`; it is a synthetic demonstration and must not be interpreted as a real-store performance guarantee.
+
+| Model | HitRate@5 |
+|---|---:|
+| SKU sequence n-gram | 57.50% |
+| Popularity baseline | 42.92% |
