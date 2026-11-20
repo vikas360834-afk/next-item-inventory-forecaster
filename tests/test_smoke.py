@@ -1,6 +1,3 @@
-from app.core import *
-
-
-def test_import_core():
-    import app.core
-    assert app.core is not None
+def test_streamlit_app_compiles():
+    import py_compile
+    py_compile.compile("app/main.py",doraise=True)
