@@ -1,39 +1,39 @@
 # Next-Item Inventory Forecaster
 
-An interactive Streamlit application for forecasting the next items customers are likely to buy, using sequential transaction patterns. Includes a lightweight n-gram baseline and a genuine small PyTorch causal Transformer, inventory planning, sales analytics, association insights, CSV import, reports, and model evaluation.
+A Streamlit application that recommends likely next purchases from an incomplete shopping basket. It includes a SKU sequence n-gram model, a trainable PyTorch causal Transformer, inventory planning, sales analytics, basket associations, CSV import, and holdout evaluation.
 
-## Features
-- Import transaction histories from CSV and explore sample retail transactions.
-- Forecast likely next SKUs with the n-gram baseline or trained Transformer.
-- Train the Transformer from SKU sequences, inspect training loss, and save/load checkpoints.
-- Compare model performance on a holdout split.
-- Inventory replenishment planning, sales analytics, item associations, and reports.
+## Run locally (Windows PowerShell)
 
-## Run locally
-```bash
-python -m venv .venv
-# Windows: .venv\\Scripts\\Activate.ps1
-# macOS/Linux: source .venv/bin/activate
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
 pip install -r requirements.txt
+pytest -q
 streamlit run app/main.py
 ```
 
+Open http://localhost:8501.
+
+## Milestones
+1. Generate reproducible mock shopping transactions represented as ordered SKU sequences.
+2. Encode SKU identifiers as tokens and learn next-token patterns.
+3. Continue domain training with a small causal Transformer using next-token cross-entropy.
+4. Predict likely next SKUs from a partial basket.
+5. Display ranked recommendations and relative scores in Streamlit.
+6. Compare a sequence model with a popularity baseline using HitRate@K and MRR.
+
+## Features
+- Partial basket input with product search.
+- Top 3, 5, 7, or 10 next-item recommendations.
+- Option to exclude products already in the basket.
+- Causal Transformer training and local checkpoint persistence.
+- N-gram baseline for lightweight comparison.
+- Inventory reorder planner, sales charts, and frequently-bought-together analysis.
+- CSV transaction import using transaction_id and sku columns.
+
+## Model and limitations
+The Transformer is a compact model trained from scratch on SKU token sequences; it is not a fine-tuned pretrained GPT model. The bundled data is synthetic. Recommendation scores are ranking scores rather than calibrated purchase probabilities. Evaluate on anonymized, time-ordered point-of-sale data before making real replenishment decisions.
+
 ## Tests
-```bash
-pytest -q
-```
-
-## Transformer details and limitations
-The Transformer is a small causal sequence model implemented with PyTorch. It learns token and positional embeddings, applies causal self-attention, and predicts the next SKU token. It is intended as an educational/local retail prototype; quality depends on the size and representativeness of transaction history. It is not a production replenishment system and should be evaluated against real store data before operational use.
-
-## Project structure
-- `app/main.py` – Streamlit interface
-- `app/core.py` – n-gram forecasting and core logic
-- `app/features.py` – analytics and inventory features
-- `app/transformer.py` – PyTorch causal Transformer
-- `app/storage.py` – persistence helpers
-- `data/` – sample transactions and evaluation metadata
-- `tests/` – automated tests
-
-## License
-See repository license settings before reuse.
+Run `pytest -q` to execute automated checks.
